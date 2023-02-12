@@ -1,56 +1,79 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            {{-- <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a> --}}
-        </x-slot>
+@extends('layouts.theme')
+@section('content')
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="header-navbar-shadow"></div>
+    <div class="content-wrapper">
+        <div class="content-header row">
+        </div>
+        <div class="content-body">
+            <section class="row flexbox-container">
+                <div class="col-xl-8 col-11 d-flex justify-content-center">
+                    <div class="card bg-authentication rounded-3 mb-0 ">
+                        <div class="row m-0 py-4 pe-3">
+                            <div class="col-lg-6 d-lg-block d-none text-center align-self-center px-2 py-1">
+                                <img src="{{ asset('app-assets/images/pages/login.png') }}" alt="branding logo">
+                            </div>
+                            <div class="col-lg-6 col-12 p-0">
+                                <div class="card rounded-3 mb-0 px-2 py-5">
+                                    <div class="card-header pb-1">
+                                        <div class="card-title">
+                                            <h4 class="mb-3">Login</h4>
+                                        </div>
+                                    </div>
+                                <form method="POST" action="{{ route('login') }}">
+                                    @csrf
 
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
+                                    <p class="px-4">Welcome back, please login to your account.</p>
+                                    <div class="card-content">
+                                        <div class="card-body pt-1">
+                                            <form action="index.html">
+                                                <fieldset class="form-label-group form-group position-relative has-icon-left">
+                                                    <input type="text" class="form-control" id="email" placeholder="Username" name="email" value="{{ old('email') }}" required>
+                                                    <div class="form-control-position">
+                                                        <i class="feather icon-user"></i>
+                                                    </div>
+                                                    <label for="email">Username</label>
+                                                </fieldset>
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                                                <fieldset class="form-label-group position-relative has-icon-left">
+                                                    <input type="password" class="form-control" id="user-password" placeholder="Password" name="password" required autocomplete="current-password">
+                                                    <div class="form-control-position">
+                                                        <i class="feather icon-lock"></i>
+                                                    </div>
+                                                    <label for="user-password">Password</label>
+                                                </fieldset>
+                                                <div class="form-group d-flex justify-content-between align-items-center">
+                                                    <div class="text-start">
+                                                        <fieldset class="checkbox">
+                                                            <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                <input type="checkbox">
+                                                                <span class="vs-checkbox">
+                                                                    <span class="vs-checkbox--check">
+                                                                        <i class="vs-icon feather icon-check"></i>
+                                                                    </span>
+                                                                </span>
+                                                                <span class="">Remember me</span>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="text-end"><a href="auth-forgot-password.html" class="card-link">Forgot Password?</a></div>
+                                                </div>
+                                                <a href="#" class="btn btn-sm btn-outline-primary float-start btn-inline">Register</a>
+                                                <button type="submit" class="btn btn-primary float-end btn-inline">Login</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </form>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-
-            <!-- Email Address -->
-            <div>
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
-
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
-            </div>
-
-            <!-- Remember Me -->
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-button class="ml-3">
-                    {{ __('Log in') }}
-                </x-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+        </div>
+    </div>
+</div>
+@endsection
